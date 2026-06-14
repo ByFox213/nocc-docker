@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nocc-server
+  labels:
+    app: nocc-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nocc-server
+  template:
+    metadata:
+      labels:
+        app: nocc-server
+    spec:
+      containers:
+      - name: nocc-server
+        image: nocc-server:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 43210
+          name: nocc-port
+        resources:
+          requests:
+            cpu: "4"
+            memory: "4Gi"
+          limits:
+            cpu: "20"
+            memory: "16Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nocc-server
+spec:
+  selector:
+    app: nocc-server
+  ports:
+  - protocol: TCP
+    port: 43210
+    targetPort: 43210
