@@ -16,7 +16,10 @@ spec:
     spec:
       containers:
       - name: nocc-server
-        image: nocc-server:latest
+        # Using the image built by GitHub Actions from your GHCR repository:
+        image: ghcr.io/byfox213/nocc-docker/nocc-server:latest
+        # If you want to use a locally built image instead, uncomment this:
+        # image: nocc-server:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 43210

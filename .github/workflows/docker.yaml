@@ -6,8 +6,8 @@ on:
       - develop
       - master
     paths:
-      - 'Dockerfile.nocc-server'
-      - '.github/workflows/nocc-server.yml'
+      - 'Dockerfile'
+      - '.github/workflows/docker.yaml'
   workflow_dispatch:
 
 jobs:
@@ -44,7 +44,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: Dockerfile.nocc-server
+          file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
